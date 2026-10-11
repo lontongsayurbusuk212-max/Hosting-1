@@ -1,216 +1,677 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#0f172a', /* slate-900 */
-                        darker: '#020617', /* slate-950 */
-                        primary: '#3b82f6', /* blue-500 */
-                        primaryHover: '#2563eb', /* blue-600 */
-                        textMain: '#f8fafc', /* slate-50 */
-                        textMuted: '#94a3b8', /* slate-400 */
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Rafa Hadrian - Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        :root {
+            --bg-main: #111827;
+            --bg-surface: #1f2937;
+            --bg-surface-light: #374151;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --primary-light: #60a5fa;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --font-main: 'Inter', sans-serif;
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .title-underline {
+            width: 4rem;
+            height: 0.25rem;
+            background-color: var(--primary);
+            margin: 0.5rem auto 1rem;
+            border-radius: 999px;
+        }
+
         .gradient-text {
-            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-outline {
+            background-color: var(--bg-surface);
+            border-color: var(--border-color);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-surface-light);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(17, 24, 39, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .desktop-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .desktop-nav a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Pure CSS Checkbox Hack for Mobile Menu */
+        #nav-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .menu-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--primary-light);
+            background-color: var(--bg-surface-light);
+        }
+
+        #nav-toggle:checked ~ .mobile-nav {
+            display: block;
+        }
+
+        #nav-toggle:checked ~ .menu-icon {
+            color: var(--text-main);
+        }
+
+        .home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            background: radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .home-content h2 {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .home-content h1 {
+            font-size: 3.25rem;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .home-content p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .home-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .home-image-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .home-image {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-surface-light);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .about {
+            background-color: rgba(31, 41, 55, 0.4);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .info-card {
+            background-color: var(--bg-surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .info-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-value {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .info-value a {
+            color: var(--primary-light);
+        }
+
+        .info-value a:hover {
+            text-decoration: underline;
+        }
+
+        .projects-intro {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: -1rem auto 3rem;
+            font-size: 1.05rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 850px;
+            margin: 0 auto;
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-surface);
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .img-wrapper {
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background-color: var(--bg-surface-light);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: rgba(59, 130, 246, 0.12);
+            color: var(--primary-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .footer {
+            background-color: var(--bg-main);
+            border-top: 1px solid var(--border-color);
+            padding: 2.5rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-light);
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-image {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .home-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .home-image-container {
+                order: -1;
+            }
+
+            .home-content p {
+                margin: 0 auto 2rem;
+            }
+
+            .home-buttons {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-list {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-<body class="bg-dark text-textMain antialiased selection:bg-primary selection:text-white">
+<body>
 
-    <header class="fixed top-0 left-0 w-full z-50 bg-darker/90 backdrop-blur-md border-b border-slate-800">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold tracking-tighter">
-                Port<span class="text-primary">folio.</span>
-            </a>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Porto<span>folio</span></a>
             
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="#home" class="text-textMuted hover:text-primary transition-colors font-medium">Home</a>
-                <a href="#about" class="text-textMuted hover:text-primary transition-colors font-medium">About</a>
-                <a href="#projects" class="text-textMuted hover:text-primary transition-colors font-medium">My Projects</a>
+            <nav class="desktop-nav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
             </nav>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-textMuted hover:text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="menu-icon" aria-label="Toggle Navigation">
+                <svg viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-            </button>
-        </div>
+            </label>
 
-        <!-- Mobile Nav Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-darker border-b border-slate-800 absolute w-full left-0 shadow-xl">
-            <nav class="flex flex-col px-6 py-4 space-y-4">
-                <a href="#home" class="mobile-link text-textMuted hover:text-primary transition-colors font-medium">Home</a>
-                <a href="#about" class="mobile-link text-textMuted hover:text-primary transition-colors font-medium">About</a>
-                <a href="#projects" class="mobile-link text-textMuted hover:text-primary transition-colors font-medium">My Projects</a>
+            <nav class="mobile-nav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">My Projects</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="home" class="min-h-screen flex items-center pt-20">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1 flex justify-center">
-                    <img src="https://placehold.co/400x400/1e293b/3b82f6?text=Student+Avatar" alt="Profile" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-slate-800 shadow-blue-500/20">
-                </div>
-                <div class="order-1 md:order-2 text-center md:text-left space-y-6">
-                    <h2 class="text-primary font-semibold tracking-wide uppercase text-sm">Hello, I'm a Student</h2>
-                    <h1 class="text-5xl md:text-6xl font-bold leading-tight">
-                        Hi, I'm <span class="gradient-text">[Your Name]</span><br>
-                        Aspiring <span class="text-slate-300">Developer</span>
-                    </h1>
-                    <p class="text-textMuted text-lg max-w-lg mx-auto md:mx-0">
-                        I'm currently studying [Your Major] at [Your University]. I love building modern, responsive, and user-friendly web applications.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
-                        <a href="#projects" class="px-8 py-3 bg-primary hover:bg-primaryHover text-white font-medium rounded-lg transition-colors shadow-lg shadow-blue-500/30 text-center">
-                            View My Work
-                        </a>
-                        <a href="#about" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors border border-slate-700 text-center">
-                            More About Me
-                        </a>
+        <section id="home" class="section home">
+            <div class="container home-grid">
+                <div class="home-content">
+                    <h2>"Banyak alasan buat lampaui batasan bareng valorant"</h2>
+                    <h1>Saya <span class="gradient-text">Rafa Hadrian</span><br>Anak Percik</h1>
+                    <p>Saya seorang pelajar di sekolah SMK 3 Perguruan Cikini. Saya manusia biasa, makan nasi.</p>
+                    <div class="home-buttons">
+                        <a href="#projects" class="btn btn-primary">Kerjaan</a>
+                        <a href="#about" class="btn btn-outline">Siapa Saya?</a>
                     </div>
+                </div>
+                <div class="home-image-container">
+                    <img src="https://placehold.co/400x400/1f2937/3b82f6?text=Rafa+Hadrian" alt="Avatar Rafa Hadrian" class="home-image">
                 </div>
             </div>
         </section>
 
-        <section id="about" class="py-24 bg-slate-900/50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">About <span class="text-primary">Me</span></h2>
-                    <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+        <section id="about" class="section about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About <span>Me</span></h2>
+                    <div class="title-underline"></div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
-                    <div class="space-y-6 text-textMuted leading-relaxed text-lg">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                        <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                <div class="about-grid">
+                    <div>
+                        <img src="https://placehold.co/400x500/1f2937/3b82f6?text=Foto+Rafa" alt="Foto Rafa Hadrian" class="about-image">
                     </div>
-                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
-                        <h3 class="text-xl font-bold mb-6 text-white">My Skills</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">HTML5</span>
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">CSS3</span>
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">JavaScript</span>
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">React</span>
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">Tailwind CSS</span>
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">Python</span>
-                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">Git</span>
+                    
+                    <div>
+                        <div class="about-text">
+                            <p>Ini portofolio saya. Saya memiliki ketertarikan pada dunia teknologi, pemrograman, jaringan komputer, dan administrasi server.</p>
+                            <p>Website ini menjadi tempat untuk memperkenalkan perjalanan belajar, proyek, dan berbagai hal yang saya pelajari.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>Personal Information</h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <span class="info-label">Nama:</span>
+                                    <span class="info-value">Rafa Hadrian</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Umur:</span>
+                                    <span class="info-value">18 Tahun</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Sekolah:</span>
+                                    <span class="info-value">SMK 3 Perguruan Cikini</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Jurusan:</span>
+                                    <span class="info-value">Teknik Komputer Jaringan</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Tempat Tinggal:</span>
+                                    <span class="info-value">Jl.h.e. Mahjur rt.13 rw.05 no.43A Lenteng Agung Jagakarsa Jaksel 12610</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Email:</span>
+                                    <span class="info-value"><a href="mailto:rafa.hadrian.7d@gmail.com">rafa.hadrian.7d@gmail.com</a></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4">My <span class="text-primary">Projects</span></h2>
-                    <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
-                    <p class="text-textMuted mt-4 max-w-2xl mx-auto">Here are a few placeholder projects I've worked on during my studies.</p>
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Projek <span>Saya</span></h2>
+                    <div class="title-underline"></div>
                 </div>
+                <p class="projects-intro">Projek yang saya pernah lakukan</p>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project Card 1 -->
-                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary transition-colors group">
-                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Project+One" alt="Project 1" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-6 space-y-4">
-                            <h3 class="text-xl font-bold text-white">E-Commerce Placeholder</h3>
-                            <p class="text-textMuted text-sm line-clamp-3">
-                                A mock e-commerce website built for a class project. Features include a product catalog, shopping cart, and mock checkout flow.
-                            </p>
-                            <div class="flex gap-2 text-xs font-semibold text-primary">
-                                <span>#React</span>
-                                <span>#Node.js</span>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card">
+                        <div class="img-wrapper">
+                            <img src="https://placehold.co/600x400/1f2937/3b82f6?text=E-Commerce+Project" alt="E-Commerce Placeholder" class="project-img">
+                        </div>
+                        <div class="project-info">
+                            <h3>Membuat Dedicated server</h3>
+                            <p>Server fisik untuk eksperimen berbagai hal seperti VM, hosting web, server hosting, dan bahkan server NAS</p>
+                            <div class="project-tags">
+                                <span class="tag">#PHP</span>
+                                <span class="tag">#HTML5</span>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
-                    <!-- Project Card 2 -->
-                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary transition-colors group">
-                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Project+Two" alt="Project 2" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-6 space-y-4">
-                            <h3 class="text-xl font-bold text-white">Weather Dashboard</h3>
-                            <p class="text-textMuted text-sm line-clamp-3">
-                                An application that fetches real-time weather data from an API and displays forecasts using charts and interactive elements.
-                            </p>
-                            <div class="flex gap-2 text-xs font-semibold text-primary">
-                                <span>#JavaScript</span>
-                                <span>#API</span>
+                    <!-- Project 2 -->
+                    <article class="project-card">
+                        <div class="img-wrapper">
+                            <img src="https://placehold.co/600x400/1f2937/60a5fa?text=Weather+Dashboard" alt="Weather Dashboard" class="project-img">
+                        </div>
+                        <div class="project-info">
+                            <h3>Hosting Server</h3>
+                            <p>Self-host server untuk menjalankan dan mengkonfigurasi server sendiri</p>
+                            <div class="project-tags">
+                                <span class="tag">#Java</span>
+                                <span class="tag">#Kotlin</span>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Project Card 3 -->
-                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary transition-colors group">
-                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Project+Three" alt="Project 3" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-6 space-y-4">
-                            <h3 class="text-xl font-bold text-white">Task Manager App</h3>
-                            <p class="text-textMuted text-sm line-clamp-3">
-                                A simple CRUD application to manage daily tasks, demonstrating state management and local storage functionality.
-                            </p>
-                            <div class="flex gap-2 text-xs font-semibold text-primary">
-                                <span>#HTML</span>
-                                <span>#CSS</span>
-                            </div>
-                        </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-darker border-t border-slate-800 py-8">
-        <div class="container mx-auto px-6 text-center text-textMuted space-y-4">
-            <div class="flex justify-center space-x-6">
-                <a href="#" class="hover:text-primary transition-colors">GitHub</a>
-                <a href="#" class="hover:text-primary transition-colors">LinkedIn</a>
-                <a href="#" class="hover:text-primary transition-colors">Email</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/rafa_hadrian6609/">Instagram</a>
+                <a href="https://discord.com/users/1241737321104146560">Discord</a>
+                <a href="mailto:rafa.hadrian.7d@gmail.com">Email</a>
             </div>
-            <p>&copy; 2026 Student Portfolio. Built for learning.</p>
+            <p>&copy; 2026 Rafa Hadrian</p>
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const links = document.querySelectorAll('.mobile-link');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-    </script>
 </body>
 </html>
