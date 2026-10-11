@@ -1,342 +1,216 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Portfolio - Dark & Blue</title>
-  
-  <!-- Tailwind CSS Framework loaded via CSS <link> (No JavaScript / <script> tags used) -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  
-  <style>
-    /* Dark Theme Custom Color Variables */
-    :root {
-      --bg-dark: #080c14;
-      --card-dark: #0f172a;
-      --card-border: #1e293b;
-      --nav-dark: #0d1322;
-      --accent-blue: #3b82f6;
-      --accent-cyan: #06b6d4;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: #f1f5f9;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-
-    /* Solid Opaque Navigation Header */
-    .solid-header {
-      background-color: var(--nav-dark);
-      border-bottom: 1px solid var(--card-border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Ambient Glowing Background Effect */
-    .glow-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.25;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Grid Overlay Pattern */
-    .bg-grid-pattern {
-      background-image: radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-
-    /* CSS-ONLY PAGE SWITCHING LOGIC (No <script> tags) */
-    /* Hide target sections by default */
-    #about, #projects {
-      display: none;
-    }
-
-    /* Show section when its hash link is targeted */
-    #about:target, #projects:target {
-      display: block;
-    }
-
-    /* Sibling Hiding Trick: If #about or #projects is active, hide #home */
-    #about:target ~ #home, 
-    #projects:target ~ #home {
-      display: none !important;
-    }
-
-    /* Glowing Borders & Card FX */
-    .dark-card {
-      background-color: var(--card-dark);
-      border: 1px solid var(--card-border);
-      transition: all 0.3s ease;
-    }
-
-    .dark-card:hover {
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
-    }
-
-    /* Keyframe Animations */
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(1.08); }
-    }
-
-    .animate-pulse-glow {
-      animation: pulseGlow 6s ease-in-out infinite;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a', /* slate-900 */
+                        darker: '#020617', /* slate-950 */
+                        primary: '#3b82f6', /* blue-500 */
+                        primaryHover: '#2563eb', /* blue-600 */
+                        textMain: '#f8fafc', /* slate-50 */
+                        textMuted: '#94a3b8', /* slate-400 */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+<body class="bg-dark text-textMain antialiased selection:bg-primary selection:text-white">
 
-  <!-- Ambient Blue Background Lights -->
-  <div class="glow-orb animate-pulse-glow bg-blue-600 w-96 h-96 -top-20 -left-20"></div>
-  <div class="glow-orb animate-pulse-glow bg-cyan-500 w-80 h-80 top-1/2 -right-20"></div>
-
-  <!-- Solid Navigation Bar -->
-  <header class="solid-header sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-      
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center space-x-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/30">
-          P
-        </div>
-        <span class="text-xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-          Portfolio<span class="text-blue-500">.io</span>
-        </span>
-      </a>
-
-      <!-- Navigation Links -->
-      <nav class="flex items-center space-x-2 sm:space-x-4">
-        <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition-all">
-          Home
-        </a>
-        <a href="#about" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition-all">
-          About
-        </a>
-        <a href="#projects" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition-all">
-          Projects
-        </a>
-      </nav>
-
-    </div>
-  </header>
-
-  <!-- Main Content Container -->
-  <main class="flex-grow max-w-6xl w-full mx-auto px-6 py-12 relative z-10">
-
-    <!-- ========================================== -->
-    <!-- SECTION 1: ABOUT PAGE (Targeted via #about) -->
-    <!-- ========================================== -->
-    <section id="about" class="space-y-10">
-      <div class="dark-card p-8 sm:p-12 rounded-2xl relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
-        
-        <span class="px-3 py-1 rounded-full bg-blue-950 text-blue-400 border border-blue-800/60 text-xs font-semibold uppercase tracking-wider">
-          Biography & Expertise
-        </span>
-        
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-6">
-          About Me
-        </h1>
-        
-        <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mb-8">
-          I am a dedicated Web Architect specializing in creating high-performance, dark-mode interfaces with precision engineering. My design philosophy balances raw efficiency, strict semantic HTML, and modern utility CSS frameworks.
-        </p>
-
-        <!-- Technical Skills Breakdown -->
-        <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-3">
-          Core Technical Capabilities
-        </h2>
-
-        <div class="space-y-5 max-w-2xl">
-          <div>
-            <div class="flex justify-between text-sm font-medium mb-1">
-              <span class="text-gray-200">HTML5 & Semantic Structure</span>
-              <span class="text-blue-400">98%</span>
-            </div>
-            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full" style="width: 98%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between text-sm font-medium mb-1">
-              <span class="text-gray-200">Tailwind CSS & Custom Utility Styling</span>
-              <span class="text-blue-400">95%</span>
-            </div>
-            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full" style="width: 95%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between text-sm font-medium mb-1">
-              <span class="text-gray-200">Responsive UI/UX Architecture</span>
-              <span class="text-blue-400">92%</span>
-            </div>
-            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full rounded-full" style="width: 92%"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Philosophy Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-            <div class="text-blue-400 font-bold mb-2">⚡ Performance First</div>
-            <p class="text-sm text-gray-400">Clean code structures designed for instantaneous load times and zero unnecessary scripts.</p>
-          </div>
-          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-            <div class="text-blue-400 font-bold mb-2">🎨 Dark UI Aesthetics</div>
-            <p class="text-sm text-gray-400">High-contrast, eye-friendly dark layouts featuring electric blue accents and subtle glows.</p>
-          </div>
-          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800">
-            <div class="text-blue-400 font-bold mb-2">📱 Universal Responsive</div>
-            <p class="text-sm text-gray-400">Flawless scaling across mobile phones, high-res tablets, and ultra-wide desktops.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================== -->
-    <!-- SECTION 2: PROJECTS PAGE (Targeted via #projects) -->
-    <!-- ============================================== -->
-    <section id="projects" class="space-y-8">
-      <div>
-        <span class="px-3 py-1 rounded-full bg-blue-950 text-blue-400 border border-blue-800/60 text-xs font-semibold uppercase tracking-wider">
-          Portfolio
-        </span>
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">
-          Featured Work & Applications
-        </h1>
-        <p class="text-gray-400 mt-2">Explore recent dark-themed digital creations and software projects.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- Project 1 -->
-        <div class="dark-card rounded-2xl overflow-hidden flex flex-col">
-          <div class="p-6 bg-slate-900 border-b border-slate-800">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-semibold px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">HTML5 / CSS3</span>
-              <span class="text-xs text-gray-400">Featured</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">E-Commerce Dark Dashboard</h3>
-          </div>
-          <div class="p-6 flex-grow flex flex-col justify-between">
-            <p class="text-gray-300 text-sm leading-relaxed mb-6">
-              A high-contrast analytics dashboard tailored for online storefronts, optimized for dark mode readability and dark blue data visualization metrics.
-            </p>
-            <div class="flex items-center space-x-3">
-              <a href="#" class="px-4 py-2 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white transition-colors">Live Demo</a>
-              <a href="#" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-gray-300 transition-colors border border-slate-700">View Source</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="dark-card rounded-2xl overflow-hidden flex flex-col">
-          <div class="p-6 bg-slate-900 border-b border-slate-800">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-semibold px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">Tailwind Utility</span>
-              <span class="text-xs text-gray-400">Featured</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">Cloud Task Manager</h3>
-          </div>
-          <div class="p-6 flex-grow flex flex-col justify-between">
-            <p class="text-gray-300 text-sm leading-relaxed mb-6">
-              A sleek project management portal interface designed with responsive Kanban columns, dark slate card grids, and interactive blue highlight badges.
-            </p>
-            <div class="flex items-center space-x-3">
-              <a href="#" class="px-4 py-2 rounded-lg text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white transition-colors">Live Demo</a>
-              <a href="#" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-gray-300 transition-colors border border-slate-700">View Source</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================== -->
-    <!-- SECTION 3: HOME PAGE (Default landing section) -->
-    <!-- ============================================== -->
-    <section id="home" class="space-y-12">
-      
-      <!-- Hero Banner Card -->
-      <div class="dark-card p-8 sm:p-14 rounded-3xl relative overflow-hidden bg-grid-pattern">
-        
-        <div class="max-w-3xl relative z-10">
-          
-          <!-- Pulsing Status Badge -->
-          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-800/80 mb-6">
-            <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-ping"></span>
-            <span class="text-xs font-semibold text-blue-300 tracking-wide uppercase">
-              Available for Hire & Projects
-            </span>
-          </div>
-
-          <!-- Headline -->
-          <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight mb-6">
-            Dark Mode & <br>
-            <span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-              Blue UI Architect
-            </span>
-          </h1>
-
-          <!-- Tagline -->
-          <p class="text-gray-300 text-lg sm:text-xl leading-relaxed mb-8">
-            Crafting lightweight, high-contrast, and responsive web applications engineered with modern blue aesthetics and pure CSS architecture.
-          </p>
-
-          <!-- Call to Actions -->
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="#projects" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all transform hover:-translate-y-0.5">
-              Explore Projects &rarr;
+    <header class="fixed top-0 left-0 w-full z-50 bg-darker/90 backdrop-blur-md border-b border-slate-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold tracking-tighter">
+                Port<span class="text-primary">folio.</span>
             </a>
-            <a href="#about" class="px-7 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-200 font-bold text-sm border border-slate-700 transition-all">
-              Read About Me
-            </a>
-          </div>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="text-textMuted hover:text-primary transition-colors font-medium">Home</a>
+                <a href="#about" class="text-textMuted hover:text-primary transition-colors font-medium">About</a>
+                <a href="#projects" class="text-textMuted hover:text-primary transition-colors font-medium">My Projects</a>
+            </nav>
 
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-textMuted hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
 
-      </div>
-
-      <!-- Key Metrics Row -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="dark-card p-6 rounded-2xl text-center">
-          <div class="text-3xl font-extrabold text-blue-400 mb-1">3+</div>
-          <div class="text-sm font-medium text-gray-400">Years Experience</div>
+        <!-- Mobile Nav Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-darker border-b border-slate-800 absolute w-full left-0 shadow-xl">
+            <nav class="flex flex-col px-6 py-4 space-y-4">
+                <a href="#home" class="mobile-link text-textMuted hover:text-primary transition-colors font-medium">Home</a>
+                <a href="#about" class="mobile-link text-textMuted hover:text-primary transition-colors font-medium">About</a>
+                <a href="#projects" class="mobile-link text-textMuted hover:text-primary transition-colors font-medium">My Projects</a>
+            </nav>
         </div>
-        <div class="dark-card p-6 rounded-2xl text-center">
-          <div class="text-3xl font-extrabold text-cyan-400 mb-1">25+</div>
-          <div class="text-sm font-medium text-gray-400">Projects Completed</div>
+    </header>
+
+    <main>
+        <section id="home" class="min-h-screen flex items-center pt-20">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 flex justify-center">
+                    <img src="https://placehold.co/400x400/1e293b/3b82f6?text=Student+Avatar" alt="Profile" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-slate-800 shadow-blue-500/20">
+                </div>
+                <div class="order-1 md:order-2 text-center md:text-left space-y-6">
+                    <h2 class="text-primary font-semibold tracking-wide uppercase text-sm">Hello, I'm a Student</h2>
+                    <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                        Hi, I'm <span class="gradient-text">[Your Name]</span><br>
+                        Aspiring <span class="text-slate-300">Developer</span>
+                    </h1>
+                    <p class="text-textMuted text-lg max-w-lg mx-auto md:mx-0">
+                        I'm currently studying [Your Major] at [Your University]. I love building modern, responsive, and user-friendly web applications.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                        <a href="#projects" class="px-8 py-3 bg-primary hover:bg-primaryHover text-white font-medium rounded-lg transition-colors shadow-lg shadow-blue-500/30 text-center">
+                            View My Work
+                        </a>
+                        <a href="#about" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors border border-slate-700 text-center">
+                            More About Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">About <span class="text-primary">Me</span></h2>
+                    <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
+                    <div class="space-y-6 text-textMuted leading-relaxed text-lg">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                        <p>
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
+                        <h3 class="text-xl font-bold mb-6 text-white">My Skills</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">HTML5</span>
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">CSS3</span>
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">JavaScript</span>
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">React</span>
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">Tailwind CSS</span>
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">Python</span>
+                            <span class="px-4 py-2 bg-dark rounded-md text-primary text-sm font-medium border border-slate-700">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">My <span class="text-primary">Projects</span></h2>
+                    <div class="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+                    <p class="text-textMuted mt-4 max-w-2xl mx-auto">Here are a few placeholder projects I've worked on during my studies.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1 -->
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary transition-colors group">
+                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Project+One" alt="Project 1" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-white">E-Commerce Placeholder</h3>
+                            <p class="text-textMuted text-sm line-clamp-3">
+                                A mock e-commerce website built for a class project. Features include a product catalog, shopping cart, and mock checkout flow.
+                            </p>
+                            <div class="flex gap-2 text-xs font-semibold text-primary">
+                                <span>#React</span>
+                                <span>#Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary transition-colors group">
+                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Project+Two" alt="Project 2" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-white">Weather Dashboard</h3>
+                            <p class="text-textMuted text-sm line-clamp-3">
+                                An application that fetches real-time weather data from an API and displays forecasts using charts and interactive elements.
+                            </p>
+                            <div class="flex gap-2 text-xs font-semibold text-primary">
+                                <span>#JavaScript</span>
+                                <span>#API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3 -->
+                    <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary transition-colors group">
+                        <img src="https://placehold.co/600x400/1e293b/ffffff?text=Project+Three" alt="Project 3" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-white">Task Manager App</h3>
+                            <p class="text-textMuted text-sm line-clamp-3">
+                                A simple CRUD application to manage daily tasks, demonstrating state management and local storage functionality.
+                            </p>
+                            <div class="flex gap-2 text-xs font-semibold text-primary">
+                                <span>#HTML</span>
+                                <span>#CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-darker border-t border-slate-800 py-8">
+        <div class="container mx-auto px-6 text-center text-textMuted space-y-4">
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-primary transition-colors">GitHub</a>
+                <a href="#" class="hover:text-primary transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-primary transition-colors">Email</a>
+            </div>
+            <p>&copy; 2026 Student Portfolio. Built for learning.</p>
         </div>
-        <div class="dark-card p-6 rounded-2xl text-center">
-          <div class="text-3xl font-extrabold text-indigo-400 mb-1">99.9%</div>
-          <div class="text-sm font-medium text-gray-400">Clean CSS Uptime</div>
-        </div>
-      </div>
+    </footer>
 
-    </section>
+    <script>
+        // Mobile Menu Toggle Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
 
-  </main>
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
 
-  <!-- Footer -->
-  <footer class="mt-auto border-t border-slate-800/80 bg-slate-950 py-8 relative z-10">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500 gap-4">
-      <p>© 2026 Developer Portfolio. Built with Tailwind CSS.</p>
-      <div class="flex items-center space-x-6">
-        <a href="#" class="hover:text-blue-400 transition-colors">Privacy</a>
-        <a href="#" class="hover:text-blue-400 transition-colors">Terms</a>
-        <a href="#" class="hover:text-blue-400 transition-colors">GitHub</a>
-      </div>
-    </div>
-  </footer>
-
+        // Close mobile menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
